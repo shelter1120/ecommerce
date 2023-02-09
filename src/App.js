@@ -1,51 +1,60 @@
-import React from 'react';
-import Header from './Components/Header/Header';
-import Products from './Components/Products/Products';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import Header from "./Components/Header/Header";
+import Products from "./Components/Products/Products";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Cart from "./Components/Header/Cart";
+import CardContextProvider from "./Components/Card Context/CardContextProvider";
+import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import About from "./Components/About/About";
 
 const products = [
   {
-    title: 'Colors',
+    title: "Colors",
     price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-    album :'Albums1'
+    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+    album: "Albums1",
   },
   {
-    title: 'Black and white Colors',
+    title: "Black and white Colors",
     price: 50,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-    album :'Albums2'
-
+    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+    album: "Albums2",
   },
   {
-    title: 'Yellow and Black Colors',
+    title: "Yellow and Black Colors",
     price: 70,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-    album :'Albums3'
-
+    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+    album: "Albums3",
   },
   {
-    title: 'Blue Color',
+    title: "Blue Color",
     price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
-    album :'Albums4'
-
+    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
+    album: "Albums4",
   },
 ];
 
 const App = () => {
   return (
-    <div className='container'>
-      <div>
-      <Header />
-      <div className="col- 1 
-      col-md-4">
-      {products.map((product, index) => (
-      <Products key={index} album={product.album} title={product.title} price={product.price} imageUrl={product.imageUrl} />
-      ))}
-      </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <CardContextProvider>
+        <div>
+          <Header />
+          <Cart />
+          <Routes>
+            {/* <Route
+              path="/"
+              element={<Products path="/" products={products} />}
+            ></Route> */}
+            <Route path="/home" element={<Products path="/" products={products} />}></Route>
+           </Routes>
+        </div>
+        <Routes>
+          <Route path="/about" element={<About />}></Route>
+        </Routes>
+      </CardContextProvider>
+    </BrowserRouter>
   );
 };
 
