@@ -7,6 +7,7 @@ import CardContextProvider from "./Components/Card Context/CardContextProvider";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import About from "./Components/About/About";
+import Home from "./Components/Home/Home";
 
 const products = [
   {
@@ -47,7 +48,7 @@ const App = () => {
               path="/"
               element={<Products path="/" products={products} />}
             ></Route> */}
-            <Route path="/home" element={<Products path="/" products={products} />}></Route>
+            <Route path="/home" element={<Home />}></Route>
            </Routes>
         </div>
         <Routes>

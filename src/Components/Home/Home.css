@@ -1,0 +1,50 @@
+.ticket-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ticket-list div {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-bottom: 10px;
+  }
+
+  .ticket-list span {
+    width: 20%;
+    text-align: center;
+  }
+
+  .ticket-list button {
+    width: 80%;
+    padding: 10px 20px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .home-footer{
+    background-color: rgba(68, 51, 84, 0.242);
+    width: 100%;
+  }
+
+.home-head{
+    text-align: center;
+    padding-bottom:20px;
+    color: rgb(77, 85, 194);
+} 
+.home-btn{
+    display: flex;
+    margin: auto;
+    background-color: grey; 
+    color: #fff;
+     padding: 10px 20px;
+     text-align:center;
+}
+.home-icon{
+    display: flex;
+    margin: auto;
+    width: 100px;
+}
