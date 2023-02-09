@@ -1,38 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import {CartContext} from '../Card Context/CardContextProvider'
 
 const Cart = () => {
-  const [showCart, setShowCart] = useState(false);
-  const [cartElements] = useState([
-    {
-      title: "Colors",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-      quantity: 2,
-    },
-    {
-      title: "Black and white Colors",
-      price: 50,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-      quantity: 3,
-    },
-    {
-      title: "Yellow and Black Colors",
-      price: 70,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-      quantity: 1,
-    },
-  ]);
 
+  const [showCart, setShowCart] = useState(false);
+
+//  const {cartElements} = useContext(CartContext);
+const {cartElements} = useContext(CartContext);
+
+  console.log(cartElements)
   const handleCartButtonClick = () => {
-    setShowCart(!showCart);
+    setShowCart(!showCart); //toggle
+    console.log(cartElements)
   };
 
+
   return (
+
     <div style={{ position: "fixed", top: 0, right: 0 }}>
-      <button onClick={handleCartButtonClick}>Add to Cart</button>
+      <button onClick={handleCartButtonClick}>Show  Cart</button>
       {showCart && (
         <div
           style={{
@@ -43,11 +29,12 @@ const Cart = () => {
             overflowY: "auto",
           }}
         >
-          {cartElements.map((item, index) => (
+ {cartElements.map((item, index) => (
+  <ul>
             <div key={index} style={{ margin: "10px 0" }}>
-              <p> title: {item.title}</p>
-              <p> price : {item.price}</p>
-              <p> quantity :{item.quantity}</p>
+             <li>item: {item.title}</li>
+             <li>price : {item.price}</li>
+             <li>quantity :{item.quantity}</li>
               <img
                 src={item.imageUrl}
                 alt={item.title}
@@ -55,11 +42,14 @@ const Cart = () => {
               />
               <button style={{margin : '10px 0', border:'3px solid pink ', right:0}}>Remove</button>
             </div>
+            </ul>
           ))}
         </div>
-      )}
-    </div>
-  );
+      )} 
+    </div>  
+    );
 };
 
-export default Cart;
+  
+
+export default Cart

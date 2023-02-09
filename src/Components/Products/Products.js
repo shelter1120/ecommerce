@@ -1,16 +1,35 @@
-import React from 'react';
-import '../Products/Products.css'
+import React from "react";
+import "../Products/Products.css";
+import { useContext } from "react";
 
-const Products = ({ title, price, imageUrl,album }) => {
+import { CartContext } from "../Card Context/CardContextProvider";
+const Products = (props) => {
+  const { addToCart } = useContext(CartContext);
+
+  console.log(props);
   return (
-    <div>
-    <div className='product'>
-        <h2>{album}</h2>
-      <img src={imageUrl} alt={title} />
-      <h3>{title}</h3>
-      <p>Price: ${price}</p>
-      <button>Add to cart</button>
-    </div>
+    <div className="products">
+      {props.products.map((item) => {
+        // console.log(item)
+        return (
+          <div className="product-container">
+            <h2>{item.album}</h2>
+            <img
+              src={item.imageUrl}
+              alt={item.title}
+              className="product-image"
+            />
+            <div className="product-title">{item.title}</div>
+            <div className="product-price">Price: ${item.price}</div>
+            <button
+              className="product-addToCart"
+              onClick={() => addToCart(item)}
+            >
+              Add to cart
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 };
