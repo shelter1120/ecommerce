@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import About from "./Components/About/About";
 import Home from "./Components/Home/Home";
+import Contact from "./Components/Contact/Contact";
 
 const products = [
   {
@@ -37,6 +38,18 @@ const products = [
 ];
 
 const App = () => {
+  async function contactHanlder(contact){
+    const response=await fetch("https://react-http-1fabf-default-rtdb.firebaseio.com/contact.json",{
+        method:"POST",
+        body: JSON.stringify(contact),
+        headers:{
+          "Content-Type" :"application.json"
+        },
+    })
+    const data = await response.json();
+    console.log(data)
+
+   }
   return (
     <BrowserRouter>
       <CardContextProvider>
@@ -53,7 +66,9 @@ const App = () => {
         </div>
         <Routes>
           <Route path="/about" element={<About />}></Route>
+          <Route path="/contact" element={<Contact onAddContact={contactHanlder}/>}></Route>
         </Routes>
+
       </CardContextProvider>
     </BrowserRouter>
   );
