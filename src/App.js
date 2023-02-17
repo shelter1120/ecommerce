@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext,useState } from "react";
+
 import Header from "./Components/Header/Header";
 import Products from "./Components/Products/Products";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cart from "./Components/Header/Cart";
-import CardContextProvider from "./Components/Card Context/CardContextProvider";
-import { BrowserRouter } from "react-router-dom";
-import { Route, Routes } from "react-router-dom";
+import  { CartContext} from "./Components/Card Context/CardContextProvider";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./Components/About/About";
 import Home from "./Components/Home/Home";
 import Contact from "./Components/Contact/Contact";
+import ProductPage from "./Components/Products/ProductPage";
+import Login from "./Components/Login/Login";
 
 const products = [
   {
@@ -38,38 +40,53 @@ const products = [
 ];
 
 const App = () => {
-  async function contactHanlder(contact){
-    const response=await fetch("https://react-http-1fabf-default-rtdb.firebaseio.com/contact.json",{
-        method:"POST",
+  async function contactHanlder(contact) {
+    const response = await fetch(
+      "https://react-http-1fabf-default-rtdb.firebaseio.com/contact.json",
+      {
+        method: "POST",
         body: JSON.stringify(contact),
-        headers:{
-          "Content-Type" :"application.json"
+        headers: {
+          "Content-Type": "application.json",
         },
-    })
+      }
+    );
     const data = await response.json();
-    console.log(data)
+    console.log(data);
+  }
+  const [data, setData] = useState([]);
 
-   }
+  const addToZoom = (d) => {
+    console.log();
+    // setData([d]);
+  };
+
+  const authctx = useContext(CartContext);
+  console.log(authctx);
   return (
     <BrowserRouter>
-      <CardContextProvider>
-        <div>
-          <Header />
-          <Cart />
-          <Routes>
-            {/* <Route
-              path="/"
-              element={<Products path="/" products={products} />}
-            ></Route> */}
-            <Route path="/home" element={<Home />}></Route>
-           </Routes>
-        </div>
+      <div>
+        <Header />
+        <Cart />
         <Routes>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/contact" element={<Contact onAddContact={contactHanlder}/>}></Route>
-        </Routes>
+          {authctx.contextValue.isLoggin && (
+            <Route
+              path="/"
+              element={<Products products={products} cartElement={addToZoom} />}
+            />
+          )}
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/contact"
+            element={<Contact onAddContact={contactHanlder} />}
+          />
+          <Route path="/productpage" element={<ProductPage item={data} />} />
+          {!authctx.contextValue.isLoggin && <Route path="/login" element={<Login />} />}
 
-      </CardContextProvider>
+
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 };
