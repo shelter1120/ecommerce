@@ -1,17 +1,17 @@
 import React from "react";
 import "../Products/Products.css";
 import { useContext } from "react";
-
 import { CartContext } from "../Card Context/CardContextProvider";
 import { NavLink } from "react-router-dom";
 const Products = (props) => {
+
   const { addToCart } = useContext(CartContext);
 
-  console.log(props);
+  // console.log(props);
   return (
     <div className="products">
       {props.products.map((item) => {
-        // console.log(item)
+        //  console.log(item)
         return (
         
           <div className="product-container">

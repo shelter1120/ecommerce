@@ -84,7 +84,6 @@ const App = () => {
           <Route path="/productpage" element={<ProductPage item={data} />} />
           {!authctx.contextValue.isLoggin && <Route path="/login" element={<Login />} />}
 
-
         </Routes>
       </div>
     </BrowserRouter>

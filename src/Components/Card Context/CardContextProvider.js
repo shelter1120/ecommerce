@@ -3,7 +3,6 @@ import React, { useState, createContext } from "react";
 const CartContext = createContext();
 
 const CardContextProvider = ({ children }) => {
-
   const [cartElements, setCartElements] = useState([]);
 
   const addToCart = (item) => {
@@ -18,21 +17,21 @@ const CardContextProvider = ({ children }) => {
     }
   };
 
-// for auth
-  const initialToken = localStorage.getItem('token')
+  // for auth
+  const initialToken = localStorage.getItem("token");
   const [token, setToken] = useState(initialToken);
 
   const isUserLogin = !!token;
 
   const loginHandler = (token) => {
-    console.log("ji",token)
+    console.log("ji", token);
     setToken(token);
-    localStorage.setItem('token',token)
+    localStorage.setItem("token", token);
   };
 
   const logOutHandler = () => {
     setToken(null);
-    localStorage.removeItem('token')
+    localStorage.removeItem("token");
   };
 
   const contextValue = {
@@ -42,14 +41,12 @@ const CardContextProvider = ({ children }) => {
     logOut: logOutHandler,
   };
 
-
-
   return (
     <CartContext.Provider
       value={{
         cartElements,
         addToCart,
-        contextValue
+        contextValue,
       }}
     >
       {children}
